@@ -1,7 +1,7 @@
 
 Name:		sofia-sip
 Version:	1.12.11
-Release:	1%{?dist}
+Release:	99%{?dist}
 Summary:	Open-source SIP User-Agent library
 
 Group:		Network
@@ -12,6 +12,9 @@ Patch0:		0001-fix-undefined-behaviour.patch
 
 BuildRequires:	autoconf nethserver-devtools
 AutoReq: no
+BuildRequires: libubsan libasan
+Requires:   libubsan libasan
+
 
 %description
 Sofia-SIP is an open-source SIP User-Agent library, compliant with the
@@ -30,6 +33,11 @@ under the LGPL.
 %patch0 -p1
 
 %build
+#DEB_FLAGS="-O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address,undefined"
+DEB_FLAGS="-O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address"
+export CFLAGS="$DEB_FLAGS"
+export LDFLAGS="$DEB_FLAGS"
+
 %configure --prefix=%{_prefix} \
   --exec-prefix=%{_prefix} \
   --sysconfdir=%{_sysconfdir} \
@@ -37,7 +45,6 @@ under the LGPL.
   --datadir=%{_var}/www
 
 make %{?_smp_mflags}
-
 
 %install
 rm -rf %{buildroot}
