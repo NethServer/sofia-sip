@@ -1,6 +1,6 @@
 Name:           sofia-sip
 Version:        1.12.11
-Release:        19.1%{?dist}
+Release:        19.2%{?dist}
 Summary:        Sofia SIP User-Agent library
 
 License:        LGPLv2+
@@ -64,7 +64,7 @@ Command line utilities for the Sofia SIP UA library.
 %build
 set -x
 DBG_FLAGS="-O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address -frecord-gcc-switches"
-%configure --disable-static --disable-rpath CFLAGS="$DBG_FLAGS" LDFLAGS="$DBG_FLAGS"
+%configure --disable-rpath CFLAGS="$DBG_FLAGS" LDFLAGS="$DBG_FLAGS"
 make %{?_smp_mflags}
 #make doxygen
 
@@ -99,6 +99,7 @@ find . -name installdox -delete
 %{_libdir}/libsofia-sip-ua.so
 %{_libdir}/pkgconfig/sofia-sip-ua.pc
 %{_datadir}/sofia-sip
+%{_libdir}/libsofia-sip-ua.a
 
 %files glib
 %{_libdir}/libsofia-sip-ua-glib.so.*
@@ -108,6 +109,7 @@ find . -name installdox -delete
 %{_includedir}/sofia-sip-1.12/sofia-sip/su_source.h
 %{_libdir}/libsofia-sip-ua-glib.so
 %{_libdir}/pkgconfig/sofia-sip-ua-glib.pc
+%{_libdir}/libsofia-sip-ua-glib.a
 
 %files utils
 %{_bindir}/*
