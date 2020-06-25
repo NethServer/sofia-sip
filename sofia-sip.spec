@@ -13,7 +13,6 @@ BuildRequires:  gcc-c++
 BuildRequires:  openssl-devel >= 0.9.7
 BuildRequires:  glib2-devel >=  2.4
 BuildRequires:  lksctp-tools-devel
-BuildRequires:  devtoolset-9-libasan-devel
 
 %description
 Sofia SIP is a RFC-3261-compliant library for SIP user agents and
@@ -62,7 +61,6 @@ Command line utilities for the Sofia SIP UA library.
 
 
 %build
-set -x
 DBG_FLAGS="-O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address -frecord-gcc-switches"
 %configure --disable-rpath CFLAGS="$DBG_FLAGS" LDFLAGS="$DBG_FLAGS"
 make %{?_smp_mflags}
