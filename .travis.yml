@@ -30,7 +30,7 @@ env:
 script: >
     docker run -ti --name makerpms ${EVARS}
     --hostname b${TRAVIS_BUILD_NUMBER}.nethserver.org
-    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} scl enable devtoolset-9 -- makerpms-travis -s *.spec
+    --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} scl enable devtoolset-9 -- gcc --version
     && docker commit makerpms nethserver/build
     && docker run -ti ${EVARS}
     -e SECRET
