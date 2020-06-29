@@ -36,6 +36,7 @@ script:
     --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE}
     scl enable devtoolset-9 -- makerpms-travis sofia-sip.spec ${TRAVIS_PULL_REQUEST_SHA:+-D 'dbgflags -O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address'}
   - docker cp makerpms:/srv/makerpms/rpmbuild rpmbuild
+  - docker commit makerpms nethserver/build
   - >
     docker run -ti ${EVARS}
     -e SECRET
