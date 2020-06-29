@@ -27,6 +27,8 @@ env:
         -e ENDPOINTS_PACK
         "
 
+pre_script: git fetch origin --tags
+
 script:
   - >
     docker run -ti
