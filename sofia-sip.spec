@@ -80,7 +80,6 @@ find . -name installdox -delete
 %{_libdir}/libsofia-sip-ua.so.*
 
 %files devel
-#%doc libsofia-sip-ua/docs/html
 %dir %{_includedir}/sofia-sip-1.12
 %dir %{_includedir}/sofia-sip-1.12/sofia-sip
 %{_includedir}/sofia-sip-1.12/sofia-sip/*.h
@@ -96,7 +95,6 @@ find . -name installdox -delete
 %{_libdir}/libsofia-sip-ua-glib.so.*
 
 %files glib-devel
-#%doc libsofia-sip-ua-glib/docs/html
 %{_includedir}/sofia-sip-1.12/sofia-sip/su_source.h
 %{_libdir}/libsofia-sip-ua-glib.so
 %{_libdir}/pkgconfig/sofia-sip-ua-glib.pc
