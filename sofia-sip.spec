@@ -1,14 +1,12 @@
 Name:           sofia-sip
 Version:        1.12.11
-Release:        19.2%{?dist}
+Release:        20%{?dist}
 Summary:        Sofia SIP User-Agent library
 
 License:        LGPLv2+
 URL:            http://sofia-sip.sourceforge.net/
 Source0:        https://sourceforge.net/projects/sofia-sip/files/sofia-sip/%{version}/sofia-sip-%{version}.tar.gz/download
 Patch0:         0001-fix-undefined-behaviour.patch
-#BuildRequires:  doxygen >= 1.3
-#BuildRequires:  graphviz
 BuildRequires:  gcc-c++
 BuildRequires:  openssl-devel >= 0.9.7
 BuildRequires:  glib2-devel >=  2.4
@@ -61,13 +59,8 @@ Command line utilities for the Sofia SIP UA library.
 
 
 %build
-DBG_FLAGS="-O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address -frecord-gcc-switches"
-%configure --disable-rpath CFLAGS="$DBG_FLAGS" LDFLAGS="$DBG_FLAGS"
+%configure --disable-rpath %{?dbgflags:CFLAGS="%{dbgflags}" LDFLAGS="%{dbgflags}"}
 make %{?_smp_mflags}
-#make doxygen
-
-%check
-#TPORT_DEBUG=9 TPORT_TEST_HOST=0.0.0.0 make check
 
 %install
 export QA_RPATHS=0x0001
@@ -114,5 +107,5 @@ find . -name installdox -delete
 %{_mandir}/man1/*.1*
 
 %changelog
-* Wed Jun 24 2020 Davide Principi <davide.principi@nethesis.it> - 1.12.11-19.1
-- Debug build on CentOS 7
+* Wed Jun 24 2020 Davide Principi <davide.principi@nethesis.it> - 1.12.11-20
+- Import fc31 spec file and add conditional debug build with libasan
