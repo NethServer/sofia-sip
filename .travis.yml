@@ -27,7 +27,7 @@ env:
         -e ENDPOINTS_PACK
         "
 
-pre_script: git fetch origin --tags
+before_script: git fetch origin --tags
 
 script:
   - >
