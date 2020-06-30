@@ -1,6 +1,6 @@
 Name:           sofia-sip
 Version:        1.12.11
-Release:        20%{?dist}
+Release:        19%{?dist}
 Summary:        Sofia SIP User-Agent library
 
 License:        LGPLv2+
@@ -105,5 +105,5 @@ find . -name installdox -delete
 %{_mandir}/man1/*.1*
 
 %changelog
-* Wed Jun 24 2020 Davide Principi <davide.principi@nethesis.it> - 1.12.11-20
+* Wed Jun 24 2020 Davide Principi <davide.principi@nethesis.it> - 1.12.11-19
 - Import fc31 spec file and add conditional debug build with libasan
