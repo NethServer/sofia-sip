@@ -27,17 +27,18 @@ env:
       -e YUM_ARGS
       "
 
-#
-# Note: ${TRAVIS_PULL_REQUEST_SHA:+...} If we are building a PR, compile with libasan
-#
 script: |
+        if ! git describe --tags --exact-match --match "[0-9]*" --abbrev=7 HEAD &>/dev/null; then
+          echo "[NOTICE] No tag found. libasan compilation is enabled."
+          DEV_RELEASE=1
+        fi
         set -e -x
         docker run -ti \
           --cap-add SYS_PTRACE \
           --name makerpms ${EVARS} \
           --hostname "b${TRAVIS_BUILD_NUMBER}.nethserver.org" \
           --volume $PWD:/srv/makerpms/src:ro ${DOCKER_IMAGE} \
-          scl enable devtoolset-9 -- makerpms-travis sofia-sip.spec ${TRAVIS_PULL_REQUEST_SHA:+-D 'dbgflags -O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address'}
+          scl enable devtoolset-9 -- makerpms-travis sofia-sip.spec ${DEV_RELEASE:+-D 'dbgflags -O0 -fno-omit-frame-pointer -g3 -ggdb3 -fsanitize=address'}
         docker cp makerpms:/srv/makerpms/rpmbuild rpmbuild
         docker commit makerpms nethserver/build
         docker run -ti ${EVARS} \
