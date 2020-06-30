@@ -27,11 +27,9 @@ env:
       -e YUM_ARGS
       "
 
-#
-# Note: ${TRAVIS_PULL_REQUEST_SHA:+...} If we are building a PR, compile with libasan
-#
 script: |
-        if ! git describe --tags --exact-match --match "[0-9]*" --abbrev=7 HEAD; then
+        if ! git describe --tags --exact-match --match "[0-9]*" --abbrev=7 HEAD &>/dev/null; then
+          echo "[NOTICE] No tag found. libasan compilation is enabled."
           DEV_RELEASE=1
         fi
         set -e -x
