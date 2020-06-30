@@ -46,3 +46,4 @@ script: |
           -e AUTOBUILD_SECRET \
           -e AUTOBUILD_SECRET_URL \
           nethserver/build uploadrpms-travis
+        set +x
