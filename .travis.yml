@@ -5,7 +5,6 @@ services:
 branches:
     only:
         - master
-        - fc31
 
 env:
    global:
@@ -27,8 +26,6 @@ env:
       -e ENDPOINTS_PACK
       -e YUM_ARGS
       "
-
-before_script: git fetch origin --tags
 
 #
 # Note: ${TRAVIS_PULL_REQUEST_SHA:+...} If we are building a PR, compile with libasan
