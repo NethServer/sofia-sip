@@ -30,6 +30,9 @@ env:
 
 before_script: git fetch origin --tags
 
+#
+# Note: ${TRAVIS_PULL_REQUEST_SHA:+...} If we are building a PR, compile with libasan
+#
 script: |
         set -e -x
         docker run -ti \
